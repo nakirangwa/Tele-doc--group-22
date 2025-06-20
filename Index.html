@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teledoc - Virtual Healthcare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Onboarding Slides -->
+     <div class="onboarding">
+        <div class="onboarding-slide">
+            <div class="onboarding-image">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h2 class="onboarding-title">Find the Right Doctor</h2>
+            <p class="onboarding-description">Connect with qualified healthcare professionals from the comfort of your home.</p>
+            <div class="onboarding-indicators">
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+            </div>
+        </div>
+        <div class="onboarding-slide hide">
+            <div class="onboarding-image">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <h2 class="onboarding-title">Easy Appointments</h2>
+            <p class="onboarding-description">Book, reschedule or cancel appointments with just a few taps.</p>
+            <div class="onboarding-indicators">
+                <div class="indicator"></div>
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+            </div>
+        </div>
+        <div class="onboarding-slide hide">
+            <div class="onboarding-image">
+                <i class="fas fa-comments"></i>
+            </div>
+            <h2 class="onboarding-title">Secure Messaging</h2>
+            <p class="onboarding-description">Communicate with your doctor privately and securely.</p>
+            <div class="onboarding-indicators">
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator active"></div>
+            </div>
+        </div>
+        <div class="onboarding-actions">
+            <button class="btn btn-outline" id="skip-onboarding">Skip</button>
+            <button class="btn btn-primary" id="next-onboarding">Next</button>
+        </div>
+    </div>
+
+    <!-- Auth Screen -->
+    <div class="auth">
+        <div class="auth-header">
+            <div class="auth-logo">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h1 class="auth-title">Welcome to Teledoc</h1>
+            <p class="auth-subtitle">Your virtual healthcare partner</p>
+        </div>
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Login</div>
+            <div class="auth-tab" data-tab="signup">Sign Up</div>
+        </div>
+        <form class="auth-form" id="login-form">
+            <div class="form-group">
+                <label class="form-label" for="login-email">Email</label>
+                <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="login-password">Password</label>
+                <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Login</button>
+            <p class="auth-footer">Forgot your password? <a href="#" class="auth-link">Reset it</a></p>
+        </form>
+        <form class="auth-form hide" id="signup-form">
+            <div class="form-group">
+                <label class="form-label" for="signup-email">Email</label>
+                <input type="email" class="form-control" id="signup-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="signup-password">Password</label>
+                <input type="password" class="form-control" id="signup-password" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="signup-confirm">Confirm Password</label>
+                <input type="password" class="form-control" id="signup-confirm" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Create Account</button>
+            <p class="auth-footer">Already have an account? <a href="#" class="auth-link">Login</a></p>
+        </form>
+    </div>
+
+    <!-- Profile Setup -->
+    <div class="profile-setup">
+        <div class="profile-setup-header">
+            <h1 class="profile-setup-title">Complete Your Profile</h1>
+            <p class="profile-setup-subtitle">Help us personalize your experience</p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Choose Your Avatar</label>
+            <div class="avatar-selection">
+                <div class="avatar-option selected" data-avatar="1">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar 1">
+                </div>
+                <div class="avatar-option" data-avatar="2">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar 2">
+                </div>
+                <div class="avatar-option" data-avatar="3">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Avatar 3">
+                </div>
+                <div class="avatar-option" data-avatar="4">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar 4">
+                </div>
+                <div class="avatar-option" data-avatar="5">
+                    <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Avatar 5">
+                </div>
+                <div class="avatar-option" data-avatar="6">
+                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Avatar 6">
+                </div>
+                <div class="avatar-option" data-avatar="custom">
+                    <div class="upload-avatar">
+                        <i class="fas fa-camera"></i>
+                        <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="full-name">Full Name</label>
+            <input type="text" class="form-control" id="full-name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Select Your Role</label>
+            <div class="role-selection">
+                <div class="role-option selected" data-role="patient">
+                    <div class="role-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="role-info">
+                        <h3>Patient</h3>
+                        <p>I want to consult with doctors</p>
+                    </div>
+                </div>
+                <div class="role-option" data-role="doctor">
+                    <div class="role-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="role-info">
+                        <h3>Doctor</h3>
+                        <p>I provide medical services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group specialty-selection" id="specialty-selection">
+            <label class="form-label" for="specialty">Specialty</label>
+    <select class="form-control" id="specialty" required>
+    <option value="">Select your specialty</option>
+    <option value="Pediatrics">Pediatrics</option>
+    <option value="General Practice">General Practice</option>
+    <option value="Obstetrics">Obstetrics</option>
+    <option value="Gynecology">Gynecology</option>
+    <option value="Emergency Medicine">Emergency Medicine</option>
+    <option value="Cardiology">Cardiology</option>
+    <option value="Surgery">Surgery</option>
+    <option value="Dentistry">Dentistry</option>
+    <option value="Ophthalmology">Ophthalmology</option>
+    <option value="Infectious Disease">Infectious Disease</option>
+</select>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="age">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Enter your age" required>
+        </div>
+        <div class="form-group">
+    <label class="form-label">Gender</label>
+    <div class="gender-selection">
+        <div class="gender-option selected" data-gender="male">
+            <div class="gender-icon">
+                <i class="fas fa-mars"></i>
+            </div>
+            <div class="gender-info">
+                <h3>Male</h3>
+            </div>
+        </div>
+        <div class="gender-option" data-gender="female">
+            <div class="gender-icon">
+                <i class="fas fa-venus"></i>
+            </div>
+            <div class="gender-info">
+                <h3>Female</h3>
+            </div>
+        </div>
+        <div class="gender-option" data-gender="other">
+            <div class="gender-icon">
+                <i class="fas fa-genderless"></i>
+            </div>
+            <div class="gender-info">
+                <h3>Other</h3>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="form-group" id="workplace-group" style="display: none;">
+            <label class="form-label" for="workplace">Hospital/Clinic</label>
+            <input type="text" class="form-control" id="workplace" placeholder="Where do you work?">
+        </div>
+        <button class="btn btn-primary mt-2" id="complete-profile">Complete Profile</button>
+    </div>
+
+    <!-- Main App -->
+    <div class="app">
+        <!-- Patient Dashboard -->
+        <div class="patient-dashboard">
+            
+            <div class="main-content">
+                <!-- Home Page -->
+                <div class="home-page">
+                    <div class="page-header">
+                        <div class="header-content">
+                        <div class="greeting">
+                            <h1 id="patient-greeting">Good evening</h1>
+                            <p id="patient-name">Loading...</p>
+                        </div>
+                            <div class="profile-pic" id="patient-avatar">
+                                 <img src="" alt="Profile">
+                            </div>
+                        </div>
+                        
+                        <div class="search-box">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" placeholder="Search Doctor..." id="doctorSearch">
+                        </div>
+                    </div>  
+                  
+                  
+                    <div class="welcome-card">
+                        <h2>How can we help you today?</h2>
+                        <p>Find the right specialist for your needs</p>
+                        <i class="fas fa-stethoscope icon"></i>
+                    </div>
+                    <div class="section">
+                        <div class="section-title">
+                            <h2>Categories</h2>
+                            <a href="#" class="see-all-categories">See all</a>
+                        </div>
+                        <div class="categories" id="categories-list">
+                            <!-- Categories will be loaded dynamically -->
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-title">
+                            <h2>Popular Doctors</h2>
+                            <a href="#" class="see-all-doctors">See all</a>
+                        </div>
+                        <div class="doctors" id="popular-doctors">
+                            <!-- Doctors will be loaded dynamically -->
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-title">
+                            <h2>Upcoming Appointments</h2>
+                            <a href="#" class="see-all-appointments">See all</a>
+                        </div>
+                        <div id="upcoming-appointments">
+                            <!-- Appointments will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+<!--doctor category filter-->
+<div class="category-doctors-page hide">
+    <div class="page-header category-header">
+        <button class="btn btn-back" id="back-to-categories">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h2 id="category-doctors-title">Category Doctors</h2>
+    </div>
+    <div class="main-content">
+        <div id="category-doctors-list">
+            <!-- Doctors will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Search Results Page -->
+<div class="search-results-page hide">
+    <div class="page-header">
+        <button class="btn btn-back" id="back-from-search">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search Doctor..." id="search-input-results" autofocus>
+        </div>
+    </div>
+    <div class="main-content">
+        <div id="search-results-container">
+            <!-- Search results will be loaded here -->
+        </div>
+    </div>
+</div>
+
+                <!-- Appointments Page -->
+                <div class="appointments-page hide">
+                    <div class="page-header">
+                        <h2>My Appointments</h2>
+                    </div>
+                  
+                    <div class="appointment-filter">
+                        <button class="filter-btn active" data-filter="upcoming">Upcoming</button>
+                        <button class="filter-btn" data-filter="past">Past</button>
+                        <button class="filter-btn" data-filter="canceled">Canceled</button>
+                    </div>
+                    <div id="appointments-list">
+                        <!-- Appointments will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Messages Page -->
+                   <div class="messages-page hide">
+                       <div class="page-header">
+                            <h2>Messages</h2>
+                        </div>
+                     
+                      <div class="message-list" id="messages-list">
+                          <!-- Chats will be loaded here dynamically -->
+                      </div>
+                  </div>
+
+                <!-- Profile Page -->
+                <div class="profile-page hide">
+                    <div class="profile-header">
+                        <div class="profile-pic">
+                            <img id="profile-avatar" src="" alt="Profile">
+                        </div>
+                        <h2 id="profile-name">Loading...</h2>
+                        <p id="profile-role">Loading...</p>
+                        <button class="btn btn-outline mt-1" id="edit-profile-btn">Edit Profile</button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Email</span>
+                            <span class="detail-value" id="profile-email">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value" id="profile-age">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Gender</span>
+                            <span class="detail-value" id="profile-gender">Loading...</span>
+                        </div>
+                        <div class="detail-item" id="profile-specialty-container">
+                            <span class="detail-label">Specialty</span>
+                            <span class="detail-value" id="profile-specialty">Loading...</span>
+                        </div>
+                        <div class="detail-item" id="profile-workplace-container">
+                            <span class="detail-label">Workplace</span>
+                            <span class="detail-value" id="profile-workplace">Loading...</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger mt-2" id="logout-btn" style="width: 100%;">Logout</button>
+                </div>
+
+                <!-- Edit Profile Page -->
+                <div class="edit-profile-page hide">
+                    <div class="profile-setup-header">
+                        <h1 class="profile-setup-title">Edit Profile</h1>
+                        <p class="profile-setup-subtitle">Update your personal information</p>
+                    </div>
+                    <form class="edit-profile-form">
+                        <div class="form-group">
+                            <label class="form-label">Choose Your Avatar</label>
+                            <div class="avatar-selection">
+                                <div class="avatar-option selected" data-avatar="1">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar 1">
+                                </div>
+                                <div class="avatar-option" data-avatar="2">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar 2">
+                                </div>
+                                <div class="avatar-option" data-avatar="3">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Avatar 3">
+                                </div>
+                                <div class="avatar-option" data-avatar="4">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar 4">
+                                </div>
+                                <div class="avatar-option" data-avatar="5">
+                                    <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Avatar 5">
+                                </div>
+                                <div class="avatar-option" data-avatar="6">
+                                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Avatar 6">
+                                </div>
+                                <div class="avatar-option" data-avatar="custom">
+                              <div class="upload-avatar">
+                                  <i class="fas fa-camera"></i>
+                                  <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                              </div>
+                          </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="edit-full-name">Full Name</label>
+                            <input type="text" class="form-control" id="edit-full-name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group" id="edit-specialty-container">
+                            <label class="form-label" for="edit-specialty">Specialty</label>
+                    <select class="form-control" id="specialty" required>
+                        <option value="">Select your specialty</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="General Practice">General Practice</option>
+                        <option value="Obstetrics">Obstetrics</option>
+                        <option value="Gynecology">Gynecology</option>
+                        <option value="Emergency Medicine">Emergency Medicine</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Dentistry">Dentistry</option>
+                        <option value="Ophthalmology">Ophthalmology</option>
+                        <option value="Infectious Disease">Infectious Disease</option>
+                    </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="edit-age">Age</label>
+                            <input type="number" class="form-control" id="edit-age" placeholder="Enter your age" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Gender</label>
+                            <div class="role-selection">
+                                <div class="role-option selected" data-gender="male">
+                                    <div class="role-icon">
+                                        <i class="fas fa-mars"></i>
+                                    </div>
+                                    <div class="role-info">
+                                        <h3>Male</h3>
+                                    </div>
+                                </div>
+                                <div class="role-option" data-gender="female">
+                                    <div class="role-icon">
+                                        <i class="fas fa-venus"></i>
+                                    </div>
+                                    <div class="role-info">
+                                        <h3>Female</h3>
+                                    </div>
+                                </div>
+                                <div class="role-option" data-gender="other">
+                                    <div class="role-icon">
+                                        <i class="fas fa-genderless"></i>
+                                    </div>
+                                    <div class="role-info">
+                                        <h3>Other</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="edit-workplace-container">
+                            <label class="form-label" for="edit-workplace">Hospital/Clinic</label>
+                            <input type="text" class="form-control" id="edit-workplace" placeholder="Where do you work?">
+                        </div>
+                        <button class="btn btn-primary mt-2" id="save-profile-btn">Save Changes</button>
+                        <button class="btn btn-outline mt-1" id="cancel-edit-btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <div class="navigation">
+                <a href="#" class="nav-item active" data-page="home">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-label">Home</span>
+                </a>
+                <a href="#" class="nav-item" data-page="appointments">
+                    <i class="fas fa-calendar nav-icon"></i>
+                    <span class="nav-label">Appointments</span>
+                </a>
+                <a href="#" class="nav-item" data-page="messages">
+                    <i class="fas fa-comments nav-icon"></i>
+                    <span class="nav-label">Messages</span>
+                    <span class="badge hide" id="message-badge">0</span>
+                </a>
+                <a href="#" class="nav-item" data-page="profile">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-label">Profile</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Doctor Dashboard -->
+        <div class="doctor-dashboard hide doctor-theme">
+            <div class="main-content">
+                <!-- Home Page -->
+                <div class="home-page">
+                  <div class="page-header">
+                      <div class="header-content">
+                          <div class="greeting">
+                              <h1 id="doctor-greeting">Good morning</h1>
+                              <p id="doctor-name">Loading...</p>
+                          </div>
+                          <div class="profile-pic" id="doctor-avatar">
+                              <img src="" alt="Profile">
+                          </div>
+                      </div>
+                  </div>
+                  
+                    <div class="welcome-card">
+                        <h2>Welcome Back, Doctor</h2>
+                        <div class="doctor-stats">
+                            <div class="doctor-stat">
+                                <h3 id="todays-appointments">0</h3>
+                                <p>Today's Appointments</p>
+                            </div>
+                            <div class="doctor-stat">
+                                <h3 id="total-patients">0</h3>
+                                <p>Total Patients</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-user-md icon"></i>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">
+                            <h2>Upcoming Appointments</h2>
+                            <a href="#" class="see-all-appointments">See all</a>
+                        </div>
+                        <div id="doctor-upcoming-appointments">
+                            <!-- Appointments will be loaded dynamically -->
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-title">
+                            <h2>Recent Patients</h2>
+                            <a href="#" class="see-all-patients">See all</a>
+                        </div>
+                        <div class="categories" id="recent-patients">
+                            <!-- Recent patients will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointments Page -->
+                <div class="appointments-page hide">
+                    <div class="page-header">
+                        <h2>My Appointments</h2>
+                    </div>
+                                  
+                    <div class="appointment-filter">
+                        <button class="filter-btn active" data-filter="upcoming">Upcoming</button>
+                        <button class="filter-btn" data-filter="past">Past</button>
+                        <button class="filter-btn" data-filter="canceled">Canceled</button>
+                    </div>
+                    <div id="appointments-list">
+                        <!-- Appointments will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Messages Page -->
+                 <div class="messages-page hide">
+                   
+                      <div class="page-header">
+                          <h2>Messages</h2>
+                      </div>
+                   
+                    <div class="message-list" id="messages-list">
+                        <!-- Default system message -->
+                        <div class="message-card message-system">
+                            <div class="profile-pic system-avatar">
+                                <span>S</span>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">System</span>
+                                </div>
+                                <p class="message-preview">Welcome to Teledoc messaging</p>
+                            </div>
+                        </div>
+                        <!-- Chats will be loaded here dynamically -->
+                    </div>
+                </div>
+
+                <!-- Profile Page -->
+                <div class="profile-page hide">
+                    <div class="profile-header">
+                        <div class="profile-pic">
+                            <img id="doctor-profile-avatar" src="" alt="Profile">
+                        </div>
+                        <h2 id="doctor-profile-name">Loading...</h2>
+                        <p id="doctor-profile-specialty">Loading...</p>
+                        <button class="btn btn-outline mt-1" id="doctor-edit-profile-btn">Edit Profile</button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Email</span>
+                            <span class="detail-value" id="doctor-profile-email">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Age</span>
+                            <span class="detail-value" id="doctor-profile-age">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Gender</span>
+                            <span class="detail-value" id="doctor-profile-gender">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Specialty</span>
+                            <span class="detail-value" id="doctor-profile-specialty-detail">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Workplace</span>
+                            <span class="detail-value" id="doctor-profile-workplace">Loading...</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Patients</span>
+                            <span class="detail-value" id="doctor-profile-patients">0</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger mt-2" id="doctor-logout-btn" style="width: 100%;">Logout</button>
+                </div>
+
+                <!-- Edit Profile Page -->
+                <div class="edit-profile-page hide">
+                    <div class="profile-setup-header">
+                        <h1 class="profile-setup-title">Edit Profile</h1>
+                        <p class="profile-setup-subtitle">Update your professional information</p>
+                    </div>
+                    <form class="edit-profile-form">
+                        <div class="form-group">
+                            <label class="form-label">Choose Your Avatar</label>
+                            <div class="avatar-selection">
+                                <div class="avatar-option selected" data-avatar="1">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar 1">
+                                </div>
+                                <div class="avatar-option" data-avatar="2">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar 2">
+                                </div>
+                                <div class="avatar-option" data-avatar="3">
+                                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Avatar 3">
+                                </div>
+                                <div class="avatar-option" data-avatar="4">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar 4">
+                                </div>
+                                <div class="avatar-option" data-avatar="5">
+                                    <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Avatar 5">
+                                </div>
+                                <div class="avatar-option" data-avatar="6">
+                                    <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Avatar 6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="doctor-edit-full-name">Full Name</label>
+                            <input type="text" class="form-control" id="doctor-edit-full-name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="doctor-edit-specialty">Specialty</label>
+                            <select class="form-control" id="doctor-edit-specialty" required>
+                                <option value="">Select your specialty</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Orthopedics">Orthopedics</option>
+                                <option value="General Practice">General Practice</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="doctor-edit-age">Age</label>
+                            <input type="number" class="form-control" id="doctor-edit-age" placeholder="Enter your age" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Gender</label>
+                            <div class="role-selection">
+                                <div class="role-option selected" data-gender="male">
+                                    <div class="role-icon">
+                                        <i class="fas fa-mars"></i>
+                                    </div>
+                                    <div class="role-info">
+                                        <h3>Male</h3>
+                                    </div>
+                                </div>
+                                <div class="role-option" data-gender="female">
+                                    <div class="role-icon">
+                                        <i class="fas fa-venus"></i>
+                                    </div>
+                                    <div class="role-info">
+                                        <h3>Female</h3>
+                                    </div>
+                                </div>
+                                <div class="role-option" data-gender="other">
+                                    <div class="role-icon">
+                                        <i class="fas fa-genderless"></i>
+                                    </div>
+                                    <div class="role-info">
+                                        <h3>Other</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="doctor-edit-workplace">Hospital/Clinic</label>
+                            <input type="text" class="form-control" id="doctor-edit-workplace" placeholder="Where do you work?">
+                        </div>
+                        <button class="btn btn-primary mt-2" id="doctor-save-profile-btn">Save Changes</button>
+                        <button class="btn btn-outline mt-1" id="doctor-cancel-edit-btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <div class="navigation">
+                <a href="#" class="nav-item active" data-page="home">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-label">Home</span>
+                </a>
+                <a href="#" class="nav-item" data-page="appointments">
+                    <i class="fas fa-calendar nav-icon"></i>
+                    <span class="nav-label">Appointments</span>
+                </a>
+                <a href="#" class="nav-item" data-page="messages">
+                    <i class="fas fa-comments nav-icon"></i>
+                    <span class="nav-label">Messages</span>
+                    <span class="badge hide" id="message-badge">0</span>
+                </a>  
+                <a href="#" class="nav-item" data-page="profile">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-label">Profile</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+ <!-- Doctor Details -->
+<div class="doctor-details">
+    <div class="doctor-header">
+      <button class="btn btn-back" id="back-from-doctor-details">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="profile-pic">
+            <img id="doctor-detail-avatar" src="" alt="Doctor">
+        </div>
+        <div class="doctor-info">
+            <h2 id="doctor-detail-name">Loading...</h2>
+            <p id="doctor-detail-specialty">Loading...</p>
+            <div class="doctor-stats">
+                <div class="doctor-stat">
+                    <h3 id="doctor-detail-patients">0</h3>
+                    <p>Patients</p>
+                </div>
+                <div class="doctor-stat">
+                    <h3 id="doctor-detail-experience">0</h3>
+                    <p>Years Exp</p>
+                </div>
+                <div class="doctor-stat">
+                    <h3 id="doctor-detail-rating">0</h3>
+                    <p>Rating</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="doctor-content">
+        <div class="section">
+            <h3>About</h3>
+            <p id="doctor-detail-about">Loading...</p>
+        </div>
+        
+        <!-- Add appointment type selection -->
+        <div class="section appointment-type">
+            <h3>Appointment Type</h3>
+            <div class="appointment-type-options">
+              <div class="appointment-type-option selected" data-type="in-person">In-Person Visit</div>
+              <div class="appointment-type-option" data-type="message">Message Consultation</div>
+          </div>
+        </div>
+        
+        <!-- Add calendar for date selection -->
+  <div class="section calendar">
+    <div class="calendar-header">
+        <h3 class="calendar-title">May 2025</h3>
+    </div>
+    <table class="calendar-table">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody id="calendar-body">
+            <!-- Calendar days will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+</div>
+        
+        <!-- Updated time slots with grouping -->
+        <div class="section">
+            <h3>Available Time Slots</h3>
+            
+            <div class="time-slot-group">
+                <h4>Morning</h4>
+                <div class="time-slots" id="morning-slots"></div>
+            </div>
+            
+            <div class="time-slot-group">
+                <h4>Afternoon</h4>
+                <div class="time-slots" id="afternoon-slots"></div>
+            </div>
+            
+            <div class="time-slot-group">
+                <h4>Evening</h4>
+                <div class="time-slots" id="evening-slots"></div>
+            </div>
+        </div>
+    </div>
+    <div class="action-bar">
+        <button class="btn btn-primary" style="width: 100%;" id="book-appointment-btn">Book Appointment</button>
+    </div>
+</div>
+
+<div class="chat-modal hide">
+    <div class="chat-header">
+        <button class="btn btn-back" id="back-to-messages">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h3 id="chat-recipient-name">Loading...</h3>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <!-- Messages will be loaded here -->
+    </div>
+    <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button class="btn btn-primary" id="send-message">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+    <!-- Loading Screen -->
+    <div class="loading hide">
+        <div class="spinner"></div>
+    </div>
+    
+    
+
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
